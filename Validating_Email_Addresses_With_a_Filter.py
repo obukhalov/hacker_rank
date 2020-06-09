@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+import re
+
+def fun(s):
+    # return True if s is a valid email, else return False
+    match = re.search('((?:[a-z]|[A-Z]|[0-9]|[_-])+@(?:[a-z]|[A-Z]|[0-9])+\.(?:[a-z]|[A-Z]|[0-9]){1,3})', s)
+    if match:
+        if match.group(0) == s:
+            return True
+    return False
+
+
+def filter_mail(emails):
+    return list(filter(fun, emails))
+
+if __name__ == '__main__':
+    n = int(input())
+    emails = []
+    for _ in range(n):
+        emails.append(input())
+
+filtered_emails = filter_mail(emails)
+filtered_emails.sort()
+print(filtered_emails)
