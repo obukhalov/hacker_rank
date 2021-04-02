@@ -11,24 +11,25 @@ def largestPermutation(k, arr):
     n = len(arr)
     if k >= n:
         return [i for i in range(n,0,-1)]
-    _high = [i for i in range(n,0,-1)]
+
+    _idx = {}
+    for i in range(n):
+        _idx[arr[i]] = i
     i = 0
     while k > 0 and i <= (n - 1):
-        if arr[i] == _high[i]:
+        if arr[i] == n-i:
             i += 1
             continue
         else:
-            _sw_idx = arr.index(_high[i])
+            _sw_idx = _idx[n-i]
             _sw_el = arr[i]
-            arr[i] = _high[i]
+            arr[i] = n-i 
             arr[_sw_idx] = _sw_el
+            _idx[_sw_el] = _sw_idx
             k -= 1
             i += 1
 
     return arr
-
-
-
 
 
 if __name__ == '__main__':
@@ -44,3 +45,4 @@ if __name__ == '__main__':
 
     print(' '.join(map(str, result)))
     print('\n')
+
