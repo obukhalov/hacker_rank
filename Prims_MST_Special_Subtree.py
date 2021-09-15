@@ -32,6 +32,7 @@ def prims(n, edges, start):
             _graph_dict[_e[1]] = {_e[0] : _e[2]}
         else:
             _graph_dict[_e[1]][_e[0]] = _e[2]
+    print(_graph_dict)
     #Create a _edge key list
     _nodes_keys = [_max_weight] * n
     _nodes_keys[start - 1] = 0
