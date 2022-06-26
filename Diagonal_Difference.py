@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
@@ -15,14 +15,11 @@ import sys
 
 def diagonalDifference(arr):
     # Write your code here
-    _l_to_r = 0
-    _r_to_l = 0
-    for i in range(len(arr)):
-        _l_to_r += arr[i][i]
-        _r_to_l += arr[i][len(arr) -1 - i]
+    square_size = len(arr)
+    left_to_right = sum([arr[i][i] for i in range(square_size)])
+    right_to_left = sum([arr[i][(i + 1) * -1] for i in range(square_size)])
 
-
-    return abs(_l_to_r - _r_to_l)
+    return abs(left_to_right - right_to_left)
 
 if __name__ == '__main__':
 

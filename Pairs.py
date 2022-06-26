@@ -7,23 +7,25 @@ import re
 import sys
 
 #
-# Complete the 'getTotalX' function below.
+# Complete the 'pairs' function below.
 #
 # The function is expected to return an INTEGER.
 # The function accepts following parameters:
-#  1. INTEGER_ARRAY a
-#  2. INTEGER_ARRAY b
+#  1. INTEGER k
+#  2. INTEGER_ARRAY arr
 #
 
 
-def getTotalX(a, b):
+def pairs(k, arr):
     # Write your code here
-    start = max(a)
-    end = min(b)
+
     counter = 0
-    for i in range(start, end + 1):
-        if not any(map(lambda x: i % x, a)) and not any(map(lambda x: x % i, b)):
+    arr = set(arr)
+
+    for n in arr:
+        if n + k in arr:
             counter += 1
+
     return counter
 
 
@@ -33,12 +35,10 @@ if __name__ == "__main__":
 
     n = int(first_multiple_input[0])
 
-    m = int(first_multiple_input[1])
+    k = int(first_multiple_input[1])
 
     arr = list(map(int, input().rstrip().split()))
 
-    brr = list(map(int, input().rstrip().split()))
+    result = pairs(k, arr)
 
-    total = getTotalX(arr, brr)
-
-    print(str(total) + "\n")
+    print(str(result) + "\n")

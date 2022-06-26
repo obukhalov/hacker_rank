@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
@@ -6,43 +6,45 @@ import random
 import re
 import sys
 
-# Complete the caesarCipher function below.
+#
+# Complete the 'caesarCipher' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts following parameters:
+#  1. STRING s
+#  2. INTEGER k
+#
+
+
 def caesarCipher(s, k):
-    _alphabet = 'abcdefghijklmnopqrstuvwxyz'
-    _encr_s = ''
+    # Write your code here
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
     if k > 26:
         k = k % 26
-    for _s in s:
-        if _s.isalpha():
-            if _s.isupper():
-                _clear_idx = _alphabet.index(_s.lower())
-                if _clear_idx + k > 25:
-                    _encr_idx = _clear_idx + k - 26
-                else:
-                    _encr_idx = _clear_idx + k
-                _encr_s += _alphabet[_encr_idx].upper()
+    chiper = alphabet[k:] + alphabet[:k]
+    result = ""
+    for l in s:
+        if l.isalpha():
+            idx = alphabet.index(l.lower())
+            ch = chiper[idx]
+            if l.isupper():
+                result += ch.upper()
             else:
-                _clear_idx = _alphabet.index(_s)
-                if _clear_idx + k > 25:
-                    _encr_idx = _clear_idx + k - 26
-                else:
-                    _encr_idx = _clear_idx + k
-                _encr_s += _alphabet[_encr_idx]
+                result += ch
         else:
-            _encr_s += _s
+            result += l
 
-    return _encr_s
+    return result
 
 
+if __name__ == "__main__":
 
-if __name__ == '__main__':
-
-    n = int(input())
+    n = int(input().strip())
 
     s = input()
 
-    k = int(input())
+    k = int(input().strip())
 
     result = caesarCipher(s, k)
 
-    print(result + '\n')
+    print(result + "\n")

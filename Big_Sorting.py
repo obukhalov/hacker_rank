@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
@@ -6,32 +6,24 @@ import random
 import re
 import sys
 
-# Complete the bigSorting function below.
+#
+# Complete the 'bigSorting' function below.
+#
+# The function is expected to return a STRING_ARRAY.
+# The function accepts STRING_ARRAY unsorted as parameter.
+#
+
+
 def bigSorting(unsorted):
-    _sorted = []
-    _dict = {}
-    for _n in unsorted:
-        _len_n = len(_n)
-        if _dict.get(_len_n):
-            _dict[_len_n].append(_n)
-        else:
-            _dict[_len_n] = []
-            _dict[_len_n].append(_n)
+    # Write your code here
+    unsorted.sort(key=lambda x: int(x))
 
-    for _key in sorted(list(_dict.keys())):
-        if len(_dict[_key]) == 1:
-            _sorted.append(_dict[_key][0])
-        else:
-            _lst = _dict[_key]
-            _lst.sort(key=lambda i: int(i))
-            _sorted.extend(_lst)
+    return unsorted
 
 
-    return _sorted
+if __name__ == "__main__":
 
-if __name__ == '__main__':
-
-    n = int(input())
+    n = int(input().strip())
 
     unsorted = []
 
@@ -41,5 +33,5 @@ if __name__ == '__main__':
 
     result = bigSorting(unsorted)
 
-    print('\n'.join(result))
-
+    print("\n".join(result))
+    print("\n")

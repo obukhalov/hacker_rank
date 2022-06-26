@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
@@ -6,27 +6,25 @@ import random
 import re
 import sys
 
-# Complete the flippingBits function below.
+#
+# Complete the 'flippingBits' function below.
+#
+# The function is expected to return a LONG_INTEGER.
+# The function accepts LONG_INTEGER n as parameter.
+#
+
 def flippingBits(n):
-    _bin_n = bin(n)[2:]
-    _32_bit_bin = '0'*(32-len(_bin_n)) + _bin_n
-    _inverted_32_bit_bin = ''
-    for _b in _32_bit_bin:
-        if _b == '0':
-            _inverted_32_bit_bin += '1'
-        elif _b == '1':
-            _inverted_32_bit_bin += '0'
-
-
-    return int(_inverted_32_bit_bin, base=2)
-
+    # Write your code here
+	#bits = "{:032b}".format(n)
+	return int("11111111111111111111111111111111", base=2) - n
+	
 
 if __name__ == '__main__':
 
-    q = int(input())
+    q = int(input().strip())
 
     for q_itr in range(q):
-        n = int(input())
+        n = int(input().strip())
 
         result = flippingBits(n)
 

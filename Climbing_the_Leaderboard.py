@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
@@ -6,42 +6,39 @@ import random
 import re
 import sys
 
-# Complete the climbingLeaderboard function below.
-def climbingLeaderboard(scores, alice):
-    _scores = sorted(set(scores))
-    _scores_len = len(_scores)
-    _leaderboard = []
-    _idx = 0
-    for _s in alice:
-        for _i in range(_idx, _scores_len):
-            if _s < _scores[_i]:
-                _leaderboard.append(_scores_len - _i + 1)
-                _idx = _i
-                break
-            elif _s == _scores[_i]:
-                _leaderboard.append(_scores_len - _i)
-                _idx = _i
-                break
-            elif _s > _scores[_i]:
-                if _i == _scores_len - 1:
-                    _leaderboard.append(1)
-                else:
-                    continue
-                
+#
+# Complete the 'climbingLeaderboard' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY ranked
+#  2. INTEGER_ARRAY player
+#
 
-    return _leaderboard
 
-if __name__ == '__main__':
+def climbingLeaderboard(ranked, player):
+    # Write your code here
+    result = []
+    scores = sorted(set(ranked), reverse=True)
+    for score in player:
+        while len(scores) != 0 and score >= scores[-1]:
+            scores.pop()
+        scores.append(score)
+        result.append(len(scores))
+    return result
 
-    scores_count = int(input())
 
-    scores = list(map(int, input().rstrip().split()))
+if __name__ == "__main__":
 
-    alice_count = int(input())
+    ranked_count = int(input().strip())
 
-    alice = list(map(int, input().rstrip().split()))
+    ranked = list(map(int, input().rstrip().split()))
 
-    result = climbingLeaderboard(scores, alice)
+    player_count = int(input().strip())
 
-    print('\n'.join(map(str, result)))
-    print('\n')
+    player = list(map(int, input().rstrip().split()))
+
+    result = climbingLeaderboard(ranked, player)
+
+    print("\n".join(map(str, result)))
+    print("\n")

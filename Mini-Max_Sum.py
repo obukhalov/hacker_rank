@@ -6,19 +6,23 @@ import random
 import re
 import sys
 
-# Complete the miniMaxSum function below.
+#
+# Complete the 'miniMaxSum' function below.
+#
+# The function accepts INTEGER_ARRAY arr as parameter.
+#
+
 def miniMaxSum(arr):
-    _sum_lst = []
-    for i in range(len(arr)):
-        _tmp_lst = arr.copy()
-        _tmp_lst.pop(i)
-        _sum_lst.append(sum(_tmp_lst))
-
-    print('{} {}'.format(min(_sum_lst), max(_sum_lst)))
-
+    # Write your code here
+    arr.sort()
+    min
+    min_sum = sum(arr[:-1])
+    max_sum = sum(arr[1:])
+    print(f'{min_sum} {max_sum}')
 
 
 if __name__ == '__main__':
+
     arr = list(map(int, input().rstrip().split()))
 
     miniMaxSum(arr)

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
@@ -6,16 +6,21 @@ import random
 import re
 import sys
 
-# Complete the pangrams function below.
+#
+# Complete the 'pangrams' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING s as parameter.
+#
+
 def pangrams(s):
-    _alphabet = 'abcdefghijklmnopqrstuvwxyz'
-
-    for _s in _alphabet:
-        if not (_s in s or _s.upper() in s): 
-            return 'not pangram'
-
-    return 'pangram'
-
+    # Write your code here
+    s = s.lower()
+    s = s.replace(" ", "")
+    if len(set(s)) == 26:
+        return 'pangram'
+    else:
+        return 'not pangram'
 
 if __name__ == '__main__':
 
@@ -24,3 +29,4 @@ if __name__ == '__main__':
     result = pangrams(s)
 
     print(result + '\n')
+

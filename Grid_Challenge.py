@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
@@ -6,29 +6,35 @@ import random
 import re
 import sys
 
-# Complete the gridChallenge function below.
+#
+# Complete the 'gridChallenge' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING_ARRAY grid as parameter.
+#
+
+
 def gridChallenge(grid):
-    _c = len(grid[0])
-    _r = len(grid)
-    _sorted_raws = []
-    for _str in grid:
-        _sorted_raws.append(sorted(_str))
+    # Write your code here
+    size = len(grid)
+    for i in range(size):
+        row_sorted = sorted(grid[i])
+        grid[i] = row_sorted
+    for i in range(size):
+        col = []
+        for row in grid:
+            col.append(row[i])
+        if col != sorted(col):
+            return "NO"
+    return "YES"
 
-    for i in range(_c):
-        _col = []
-        for j in range(_r):
-            _col.append(_sorted_raws[j][i])
-        if _col != sorted(_col):
-            return 'NO'
 
-    return 'YES'
+if __name__ == "__main__":
 
-if __name__ == '__main__':
-
-    t = int(input())
+    t = int(input().strip())
 
     for t_itr in range(t):
-        n = int(input())
+        n = int(input().strip())
 
         grid = []
 
@@ -38,4 +44,4 @@ if __name__ == '__main__':
 
         result = gridChallenge(grid)
 
-        print(result + '\n')
+        print(result + "\n")

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
@@ -6,41 +6,40 @@ import random
 import re
 import sys
 
-# Complete the anagram function below.
+#
+# Complete the 'anagram' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts STRING s as parameter.
+#
+
+
 def anagram(s):
-    if len(s) % 2 != 0:
+    # Write your code here
+    if len(s) % 2 == 1:
         return -1
-    _l = len(s) // 2
-    _first = s[:_l]
-    _second = s[_l:]
-    _first_s = set(_first)
-    _second_s = set(_second)
-    _first_d = {}
-    _second_d = {}
-    for _s in _first_s:
-        _first_d[_s] = _first.count(_s)
-    for _s in _second_s:
-        _second_d[_s] = _second.count(_s)
-
-    _count = 0
-    for _k in _first_d:
-        if _k in _second_d.keys():
-            if _first_d[_k] > _second_d[_k]:
-                _count += _first_d[_k] - _second_d[_k]
-        else:
-            _count += _first_d[_k]
+    else:
+        half_s = len(s) // 2
+        left = s[:half_s]
+        right = s[half_s:]
+        unique_letters_in_left = set(left)
+        counter = 0
+        for letter in unique_letters_in_left:
+            left_letter_counter = left.count(letter)
+            right_letter_counter = right.count(letter)
+            if left_letter_counter > right_letter_counter:
+                difference = left_letter_counter - right_letter_counter
+                counter += difference
+    return counter
 
 
-    return _count 
+if __name__ == "__main__":
 
-
-if __name__ == '__main__':
-
-    q = int(input())
+    q = int(input().strip())
 
     for q_itr in range(q):
         s = input()
 
         result = anagram(s)
 
-        print(str(result) + '\n')
+        print(str(result) + "\n")

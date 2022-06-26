@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
@@ -6,31 +6,49 @@ import random
 import re
 import sys
 
-# Complete the icecreamParlor function below.
+#
+# Complete the 'icecreamParlor' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER m
+#  2. INTEGER_ARRAY arr
+#
+
+
 def icecreamParlor(m, arr):
-    for i in range(len(arr)):
-        if arr[i] < m:
-            _f1 = arr[i] 
-            _f2 = m - _f1
-            try:
-                i2 = arr[i+1:].index(_f2)
-            except ValueError:
-                continue
+    # Write your code here
+    arr_with_idx = list(enumerate(arr, start=1))
+    arr_with_idx_sotred = sorted(arr_with_idx, key=lambda x: x[1])
 
-            return sorted([i+1,(i+1)+(i2+1)])
+    while True:
+        idx_c1, c1 = arr_with_idx_sotred.pop()
 
-if __name__ == '__main__':
+        if c1 < m:
+            i = 0
 
-    t = int(input())
+            while arr_with_idx_sotred[i][1] <= m - c1:
+                c2 = arr_with_idx_sotred[i][1]
+
+                if c1 + c2 == m:
+                    idx_c2 = arr_with_idx_sotred[i][0]
+                    return sorted([idx_c2, idx_c1])
+                else:
+                    i += 1
+
+
+if __name__ == "__main__":
+
+    t = int(input().strip())
 
     for t_itr in range(t):
-        m = int(input())
+        m = int(input().strip())
 
-        n = int(input())
+        n = int(input().strip())
 
         arr = list(map(int, input().rstrip().split()))
 
         result = icecreamParlor(m, arr)
 
-        print(' '.join(map(str, result)))
-        print('\n')
+        print(" ".join(map(str, result)))
+        print("\n")

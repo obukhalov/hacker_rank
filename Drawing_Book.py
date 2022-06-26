@@ -1,43 +1,38 @@
-#!/usr/bin/env python
+#!/bin/python3
 
+import math
 import os
+import random
+import re
 import sys
 
 #
-# Complete the pageCount function below.
+# Complete the 'pageCount' function below.
 #
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. INTEGER p
+#
+
+
 def pageCount(n, p):
-    #
-    # Write your code here.
-    #
-    if n % 2 == 0:
-        _book = [ [i, i+1] for i in range(0, n + 2, 2)]
+    # Write your code here
+    total_flips = n // 2
+    left_to_right_flips = p // 2
+    right_to_left_flips = total_flips - left_to_right_flips
+    if left_to_right_flips <= right_to_left_flips:
+        return left_to_right_flips
     else:
-        _book = [ [i, i+1] for i in range(0, n + 1, 2)]
-
-    _pn = 0
-    if n //2 >= p:
-        for i in _book:
-            _pn += 1
-            if p in i:
-               break
-    else:
-        _book.reverse()
-        for i in _book:
-            _pn += 1
-            if p in i:
-                break
-
-    return _pn - 1
+        return right_to_left_flips
 
 
+if __name__ == "__main__":
 
-if __name__ == '__main__':
+    n = int(input().strip())
 
-    n = int(input())
-
-    p = int(input())
+    p = int(input().strip())
 
     result = pageCount(n, p)
 
-    print(str(result) + '\n')
+    print(str(result) + "\n")
