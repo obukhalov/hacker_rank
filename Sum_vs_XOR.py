@@ -15,12 +15,10 @@ import sys
 
 def sumXor(n):
     # Write your code here
-    if n != 0:
-        _zero_count = bin(n)[2:].count('0')
-
-        return 2 ** _zero_count
-    else:
+    if n == 0:
         return 1
+    else:
+        return int(math.pow(2, "{:b}".format(n).count("0")))
 
 
 if __name__ == '__main__':

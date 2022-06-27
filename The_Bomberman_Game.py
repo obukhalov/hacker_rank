@@ -1,84 +1,107 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
 import random
 import re
 import sys
+from pprint import pprint
 
-# Complete the bomberMan function below.
+#
+# Complete the 'bomberMan' function below.
+#
+# The function is expected to return a STRING_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. STRING_ARRAY grid
+#
+
+
+def exploison(row, col, grid):
+    grid_explosion = [["O" for _ in range(col)] for _ in range(row)]
+    for r in range(row):
+        for c in range(col):
+            if grid[r][c] == "O":
+                if r > 0 and r < (row - 1) and c > 0 and c < (col - 1):
+                    grid_explosion[r][c] = "."
+                    grid_explosion[r + 1][c] = "."
+                    grid_explosion[r - 1][c] = "."
+                    grid_explosion[r][c + 1] = "."
+                    grid_explosion[r][c - 1] = "."
+                elif r == 0 and c > 0 and c < (col - 1):
+                    grid_explosion[r][c] = "."
+                    if row > 1:
+                        grid_explosion[r + 1][c] = "."
+                    grid_explosion[r][c + 1] = "."
+                    grid_explosion[r][c - 1] = "."
+                elif r > 0 and r < (row - 1) and c == 0:
+                    grid_explosion[r][c] = "."
+                    grid_explosion[r + 1][c] = "."
+                    grid_explosion[r - 1][c] = "."
+                    if col > 1:
+                        grid_explosion[r][c + 1] = "."
+                elif r == (row - 1) and c > 0 and c < (col - 1):
+                    grid_explosion[r][c] = "."
+                    grid_explosion[r - 1][c] = "."
+                    grid_explosion[r][c + 1] = "."
+                    grid_explosion[r][c - 1] = "."
+                elif r > 0 and r < (row - 1) and c == (col - 1):
+                    grid_explosion[r][c] = "."
+                    grid_explosion[r + 1][c] = "."
+                    grid_explosion[r - 1][c] = "."
+                    grid_explosion[r][c - 1] = "."
+                elif r == 0 and c == 0:
+                    grid_explosion[r][c] = "."
+                    if row > 1:
+                        grid_explosion[r + 1][c] = "."
+                    if col > 1:
+                        grid_explosion[r][c + 1] = "."
+                elif r == 0 and c == (col - 1):
+                    grid_explosion[r][c] = "."
+                    if row > 1:
+                        grid_explosion[r + 1][c] = "."
+                    grid_explosion[r][c - 1] = "."
+                elif r == (row - 1) and c == 0:
+                    grid_explosion[r][c] = "."
+                    grid_explosion[r - 1][c] = "."
+                    if col > 1:
+                        grid_explosion[r][c + 1] = "."
+                elif r == (row - 1) and c == (col - 1):
+                    grid_explosion[r][c] = "."
+                    grid_explosion[r - 1][c] = "."
+                    grid_explosion[r][c - 1] = "."
+    grid_explosion = ["".join(col) for col in grid_explosion]
+    return grid_explosion
+
+
 def bomberMan(n, grid):
-    _R = len(grid)
-    _C = len(grid[0])
-    _new_grid = [['O' for _ in range(_C)] for _ in range(_R)]
+    # Write your code here
+    row = len(grid)
+    col = len(grid[0])
 
-#Define the grid on 3rd second
-    for i in range(_R):
-        for j in range(_C):
-            if grid[i][j] == 'O':
-                if _R != 1:
-                    if i == 0:
-                        _new_grid[i+1][j] = '.'
-                    elif i == _R - 1:
-                        _new_grid[i-1][j] = '.'
-                    else:
-                        _new_grid[i+1][j] = '.'
-                        _new_grid[i-1][j] = '.'
-                if _C != 1:
-                    if j == 0:
-                        _new_grid[i][j+1] = '.'
-                    elif j == _C - 1:
-                        _new_grid[i][j-1] = '.'
-                    else:
-                        _new_grid[i][j+1] = '.'
-                        _new_grid[i][j-1] = '.'
-                _new_grid[i][j] = '.'
-    grid3 = [''.join(_l) for _l in _new_grid]
-    _new_grid = [['O' for _ in range(_C)] for _ in range(_R)]
+    grid_full = ["".join(["O" for _ in range(col)]) for _ in range(row)]
+    grid_3sec = exploison(row, col, grid)
+    grid_5sec = exploison(row, col, grid_3sec)
 
-#Define the grid on 5rd second
-    for i in range(_R):
-        for j in range(_C):
-            if grid3[i][j] == 'O':
-                if _R != 1:
-                    if i == 0:
-                        _new_grid[i+1][j] = '.'
-                    elif i == _R - 1:
-                        _new_grid[i-1][j] = '.'
-                    else:
-                        _new_grid[i+1][j] = '.'
-                        _new_grid[i-1][j] = '.'
-                if _C != 1:
-                    if j == 0:
-                        _new_grid[i][j+1] = '.'
-                    elif j == _C - 1:
-                        _new_grid[i][j-1] = '.'
-                    else:
-                        _new_grid[i][j+1] = '.'
-                        _new_grid[i][j-1] = '.'
-                _new_grid[i][j] = '.'
-    grid5 = [''.join(_l) for _l in _new_grid]
-    _new_grid = [['O' for _ in range(_C)] for _ in range(_R)]
-
-    if n == 1:
+    if n == 0 or n == 1:
         return grid
-    elif n % 2 == 0:
-        return [''.join(_l) for _l in _new_grid]
-    elif (n - 3) % 4 == 0:
-        return grid3
-    elif (n - 5) % 4 == 0:
-        return grid5
+    elif n % 4 == 3:
+        return grid_3sec
+    elif n % 4 == 1:
+        return grid_5sec
+    else:
+        return grid_full
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-    rcn = input().split()
+    first_multiple_input = input().rstrip().split()
 
-    r = int(rcn[0])
+    r = int(first_multiple_input[0])
 
-    c = int(rcn[1])
+    c = int(first_multiple_input[1])
 
-    n = int(rcn[2])
+    n = int(first_multiple_input[2])
 
     grid = []
 
@@ -88,5 +111,5 @@ if __name__ == '__main__':
 
     result = bomberMan(n, grid)
 
-    print('\n'.join(result))
-    print('\n')
+    print("\n".join(result))
+    print("\n")

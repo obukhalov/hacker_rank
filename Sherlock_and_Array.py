@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
@@ -6,24 +6,23 @@ import random
 import re
 import sys
 
-# Complete the balancedSums function below.
+#
+# Complete the 'balancedSums' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts INTEGER_ARRAY arr as parameter.
+#
+
 def balancedSums(arr):
-    _sum1 = 0
-    _sum2 = sum(arr) - arr[0]
-    if _sum2 == 0:
-        return 'YES'
-    #_sum2 -= arr[0]
-    #print('Sum1={}  Sum2={}'.format(_sum1,_sum2))
-    for i in range(1,len(arr)):
-        _sum1 += arr[i-1]
-        _sum2 -= arr[i]
-        #print('Index={}'.format(i))
-        #print('Sum1={}  Sum2={}'.format(_sum1,_sum2))
-        if _sum1 == _sum2:
+    # Write your code here
+    total = sum(arr)
+    increment = 0
+    for n in arr:
+        total -= n
+        if increment == total:
             return 'YES'
-
+        increment += n
     return 'NO'
-
 
 
 if __name__ == '__main__':

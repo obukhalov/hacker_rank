@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python3
 
 import math
 import os
@@ -6,26 +6,37 @@ import random
 import re
 import sys
 
-# Complete the towerBreakers function below.
+#
+# Complete the 'towerBreakers' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. INTEGER m
+#
+
+
 def towerBreakers(n, m):
+    # Write your code here
     if m == 1:
         return 2
-    if n % 2 == 1:
-        return 1
-    else:
+    elif n % 2 == 0:
         return 2
+    else:
+        return 1
 
-if __name__ == '__main__':
 
-    t = int(input())
+if __name__ == "__main__":
+
+    t = int(input().strip())
 
     for t_itr in range(t):
-        nm = input().split()
+        first_multiple_input = input().rstrip().split()
 
-        n = int(nm[0])
+        n = int(first_multiple_input[0])
 
-        m = int(nm[1])
+        m = int(first_multiple_input[1])
 
         result = towerBreakers(n, m)
 
-        print(str(result) + '\n')
+        print(str(result) + "\n")
